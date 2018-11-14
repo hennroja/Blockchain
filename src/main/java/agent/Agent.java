@@ -22,7 +22,7 @@ public class Agent {
     private String name;
     private String address;
     private int port;
-    private List<Agent> peers;
+    private List<Agent> peers = new ArrayList<>();
     private List<Block> blockchain = new ArrayList<>();
 
     private ServerSocket serverSocket;
@@ -30,15 +30,13 @@ public class Agent {
 
     private boolean listening = true;
 
-    // for jackson
     public Agent() {
     }
 
-    Agent(final String name, final String address, final int port, final Block root, final List<Agent> agents) {
+    Agent(final String name, final String address, final int port, final Block root) {
         this.name = name;
         this.address = address;
         this.port = port;
-        this.peers = agents;
         blockchain.add(root);
     }
 
@@ -106,6 +104,10 @@ public class Agent {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void addPeer(Agent agent) {
+        peers.add(agent);
     }
 
     private Block getLatestBlock() {

@@ -6,10 +6,10 @@ import java.util.List;
 public class AgentManager {
 
     private List<Agent> agents = new ArrayList<>();
-    private static final Block root = new Block(0, "ROOT_HASH", "ROOT");
+    private static final Block root = new Block(0, "ROOT_HASH", "ROOT", true);
 
     public Agent addAgent(String name, String address, int port) {
-        Agent a = new Agent(name, address, port, root, agents);
+        Agent a = new Agent(name, address, port, root);
         a.startHost();
         agents.add(a);
         return a;

@@ -62,6 +62,14 @@ public class Block implements Serializable {
         hash = calculateHash(String.valueOf(index) + previousHash + String.valueOf(timestamp));
     }
 
+    public Block(int index, String preHash, String creator, boolean genesis) {
+        this.index = index;
+        this.previousHash = preHash;
+        this.creator = creator;
+        timestamp = System.currentTimeMillis();
+        hash = calculateHash(String.valueOf(index) + previousHash);
+    }
+
     public String getCreator() {
         return creator;
     }
