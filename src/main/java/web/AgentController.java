@@ -3,15 +3,14 @@ package web;
 import agent.Agent;
 import agent.AgentManager;
 import agent.Block;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
 @RequestMapping(path = "/agent")
@@ -29,9 +28,11 @@ public class AgentController {
         agentManager.deleteAgent(name);
     }
 
-    @RequestMapping(method = POST, params = {"name", "port"})
-    public Agent addAgent(@RequestParam("name") String name, @RequestParam("port") int port) {
-        return agentManager.addAgent(name, port);
+    @PostMapping(params = {"name", "address", "port"})
+    public Agent addAgent(@RequestParam("name") String name,
+                          @RequestParam("address") String address,
+                          @RequestParam("port") int port) {
+        return agentManager.addAgent(name, address, port);
     }
 
     @RequestMapping(path = "all", method = GET)

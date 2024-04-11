@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: littleblockchain
+
+server:
+  port: 8080
